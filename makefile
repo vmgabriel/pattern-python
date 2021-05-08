@@ -47,6 +47,10 @@ endif
 install-dev:
 	python -m virtualenv venv
 	chmod +x venv/bin/activate
+	make load && ./venv/bin/pip install -r requirements/development.txt
+
+
+install-test:
 	make load && ./venv/bin/pip install -r requirements/test.txt
 
 
@@ -60,6 +64,9 @@ ifeq ($(ENV), development)
 endif
 ifeq ($(ENV), production)
 	make install-prod
+endif
+ifeq ($(ENV), test)
+	make install-test
 endif
 ifeq ($(ENV), undefined)
 	make install-dev
